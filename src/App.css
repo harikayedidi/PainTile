@@ -1,38 +1,253 @@
-.App {
-  text-align: center;
-}
+    *,
+    *:before,
+    *:after {
+        box-sizing: border-box;
+    }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+    html {
+        font-size: 16px;
+    }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
+    body {
+        font-family: 'Roboto', sans-serif;
+        position: relative;
+        font-size: 100%;
+        background: #e7bd12;
+        color: #222;
+        background: -webkit-linear-gradient(to right, #40E0D0, #B2B2B2);
+        background: linear-gradient(to right, #40E0D0, #B2B2B2);
+    }
+    body::-webkit-scrollbar {
+        width: 12px;               /* width of the entire scrollbar */
+    }
+    body::-webkit-scrollbar-track {
+        background: #ddd;        /* color of the tracking area */
+    }
+    body::-webkit-scrollbar-thumb {
+        background-color: #40E0D0;    /* color of the scroll thumb */
+        border-radius: 20px;       /* roundness of the scroll thumb */
+        border: 3px solid #ddd;  /* creates padding around scroll thumb */
+    }
+    .gallery-container {
+        padding: .9375rem 0;
+    }
+    .highlight {
+        background: url(https://www.onlygfx.com/wp-content/uploads/2017/07/yellow-watercolor-brush-stroke-12.png);
+        background-repeat: no-repeat;
+        background-size: 66% 80%;
+        background-position: center;
+        padding: 8px;
+        text-align: center;
+        }
+        
+    h1 {
+        font-size: 82px;
+        background: -webkit-linear-gradient(45deg, #05ffe6, #09009f 80%);
+        /* background: #e7bd12; */
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-align: center;
+    }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
+    .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 40px;
+        max-width: 1200px;
+        width: 100%;
+        margin: 0 auto;
+    }
 
-.App-link {
-  color: #61dafb;
-}
+    @media (min-width: 20em) {
+        .gallery-grid {
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+    @media (min-width: 34em) {
+        .gallery-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (min-width: 60em) {
+        .gallery-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    .gallery-grid img {
+        width: 100%;
+        height: auto;
+        max-width: 395px;
+        max-height: 512px;
+        vertical-align: middle;
+        border-radius: 5px;
+        border: 15px solid #FFF;
+        border-top: 15px solid #DDD;
+        border-left: 15px solid #EEE;
+        border-right: 15px solid #f0f0f0;
+        box-shadow: 10px 0 15px #000;
+        filter: grayscale(100%);
+    }
+    .helper {
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+    }
+    .gallery-grid div {
+        position: relative;
+        cursor: pointer;
+        display:inline-block;
+        background: #000;
+        border: 10px solid #000;
+        border-left: 10px solid #111;
+        border-bottom: 10px solid #222;
+        border-right: 10px solid #333;
+        border-radius: 5px;
+        box-shadow: inset 2px 1px 5px #000;
+        transition: transform .2s;
+        z-index: 999;
+    }
+    .gallery-grid div:hover{
+        transform: scale(1.15);
+    }
+    .gallery-grid div:before,
+    .gallery-grid div:after {
+        transition: .7s ease;
+        opacity: 0;
+        border-radius: 2px;
+        content: "";
+    }
+
+    .gallery-grid div:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 4px;
+        left: 0;
+        right: 0;
+        background: rgba(34, 34, 34, 0.5);
+        display: block;
+    }
+
+    .gallery-grid div:hover:before{
+        opacity: 1;
+        height: auto;
+        transition: .3s opacity ease;
+        filter: grayscale(0%);
+    }
+    .gallery-grid img:hover{
+        filter: grayscale(0%);
+    }
+
+    .modal {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 999;
+        background: rgba(0, 0, 0, 0.8);
+        transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+    }
+
+    .modal-body {
+        position: relative;
+        z-index: 999;
+        top: 40%;
+        left: 60%;
+        transform: translate(-60%, -40%);
+        max-width: 900px;
+        max-height: 700px!important;
+        overflow-y: auto;
+    }
+    .modal-body::-webkit-scrollbar {
+        width: 5px;
+        max-height: 50%;
+    }
+    .modal-body::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    .modal-body::-webkit-scrollbar-thumb {
+        background-color: #40E0D0;
+        max-height: 30%;
+        border-radius: 50px;   
+    }
+
+    @media (min-width: 20em) {
+        .modal-body {
+            width: 95%;
+        }
+    }
+
+    @media (min-width: 34em) {
+        .modal-body {
+            width: 80%;
+        }
+    }
+
+    @media (min-width: 60em) {
+        .modal-body {
+            width: 60%;
+        }
+    }
+
+    .modal-body img {
+        width: 80%;
+        border: 30px solid #f0f0f0;
+    }
+
+    /* .modal-overlay {
+        position: absolute;
+        height: 70%;
+        width: 80%;
+        background:rgba(0, 0, 0, 0.8);
+        top: 0;
+        left: 0;
+    } */
+
+    .modal-body a {
+        position: absolute;
+        display: inline;
+        color: #fff;
+        text-decoration: none;
+        line-height: 36px;
+        font-size: 30px;
+        font-weight: lighter;
+        background: rgba(0, 0, 0, 0.8); 
+        border-radius: 5px;
+        text-align: center;
+    }
+
+    .modal-body .modal-close {
+        height: 25px;
+        width: 25px;
+        top: 0.4%;
+        left: 0.5%;
+        border-radius: 15px;
+        line-height: 22px;
+        font-size: 25px;
+    }
+
+    .modal-body .modal-next,
+    .modal-body .modal-prev {
+        right: 20%;
+        top: calc(50%);
+        border-radius: 5px 0 0 5px;
+        width: 40px;
+        height: 50px;
+        line-height: 40px;
+        font-size: 60px;
+        transition: transform .5s ease;
+    }
+    .modal-body .modal-next:hover,
+    .modal-body .modal-prev:hover {
+        transform: scale(1.15);
+    }
+
+    .modal-body .modal-prev {
+        left: 0;
+        right: auto;
+        border-radius: 0 5px 5px 0;
+    }
